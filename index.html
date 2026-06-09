@@ -90,7 +90,6 @@
             align-items: center;
             gap: 0.5rem;
             text-decoration: none;
-            flex-shrink: 0;
         }
 
         .nav-logo-icon {
@@ -101,15 +100,10 @@
             border-radius: 100px;
         }
 
-        /* Links absolutely centered in nav */
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            align-items: center;
         }
 
         .nav-links a {
@@ -186,6 +180,7 @@
             width: 100%;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             overflow: hidden;
@@ -212,18 +207,7 @@
             z-index: 1;
         }
 
-        /* Radial glow behind text */
-        .hero-gloww {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 700px;
-            height: 400px;
-            background: radial-gradient(ellipse, rgba(251, 118, 1, 0.22) 0%, transparent 70%);
-            z-index: 2;
-            pointer-events: none;
-        }
+
 
         /* ─── Hero Content ──────────────────────────────────────────── */
         .hero-content {
@@ -233,6 +217,10 @@
             padding: 0 1.5rem;
             max-width: 900px;
             width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             animation: fadeUp 1s ease both;
         }
 
@@ -300,6 +288,7 @@
             justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
+            width: 100%;
             animation: fadeUp 1s 0.5s ease both;
         }
 
@@ -395,8 +384,7 @@
         .scroll-indicator {
             position: absolute;
             bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 2.5rem;
             z-index: 3;
             display: flex;
             flex-direction: column;
@@ -510,10 +498,6 @@
                 gap: 1.5rem;
             }
 
-            .hero-glow {
-                width: 500px;
-                height: 300px;
-            }
 
             .hero-stats {
                 gap: 2rem;
@@ -528,31 +512,35 @@
 
             /* Full-screen mobile nav overlay */
             .nav-links {
-                display: none;
+                display: flex;
                 position: fixed;
                 inset: 0;
                 width: 100%;
                 height: 100vh;
-                background: rgba(12, 5, 1, 0.97);
-                backdrop-filter: blur(24px);
-                -webkit-backdrop-filter: blur(24px);
+                background: rgba(12, 5, 1, 0.75);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                gap: 2.2rem;
+                gap: 1.5rem;
                 z-index: 99;
                 list-style: none;
-                /* Reset desktop centering */
-                left: 0;
-                transform: none;
+                
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-20px);
+                transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
             }
 
             .nav-links.open {
-                display: flex;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
             }
 
             .nav-links a {
-                font-size: 1.35rem;
+                font-size: 1.15rem;
                 font-weight: 500;
             }
 
@@ -570,19 +558,47 @@
             /* Hero */
             .hero-content {
                 padding: 6rem 1.2rem 1.2rem;
+                text-align: center;
+                align-items: center;
+                margin: 0 auto;
             }
 
-            .hero-glow {
-                width: 320px;
-                height: 200px;
+            .hero-badge {
+                margin-left: auto;
+                margin-right: auto;
             }
+
+            .hero-title {
+                text-align: center;
+            }
+
+            .hero-subtitle {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
 
             /* Stats row */
             .hero-stats {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                transform: none;
+                margin-top: 3rem;
                 gap: 1.4rem;
-                bottom: 2rem;
                 width: 100%;
                 padding: 0 1rem;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .stat-item {
+                text-align: center;
             }
 
             .stat-divider {
@@ -591,6 +607,11 @@
 
             .stat-number {
                 font-size: 1.4rem;
+                text-align: center;
+            }
+
+            .stat-label {
+                text-align: center;
             }
 
             /* Scroll indicator hidden on tablet/mobile */
@@ -612,50 +633,76 @@
             .hero-content {
                 padding: 5.5rem 1rem 1rem;
                 max-width: 100%;
+                text-align: center;
+                align-items: center;
+                margin: 0 auto;
+            }
+
+            .hero-badge {
+                margin-left: auto;
+                margin-right: auto;
+                display: inline-flex;
             }
 
             .hero-title {
                 font-size: clamp(2.2rem, 11vw, 3.2rem);
                 letter-spacing: -0.01em;
                 line-height: 1.1;
+                text-align: center;
             }
 
             .hero-subtitle {
                 font-size: 0.95rem;
                 margin-bottom: 2rem;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .hero-actions {
                 flex-direction: column;
                 gap: 0.75rem;
-                align-items: stretch;
+                align-items: center;
+                justify-content: center;
             }
 
             .btn-primary,
             .btn-secondary {
                 width: 100%;
                 justify-content: center;
+                text-align: center;
                 padding: 0.9rem 1.5rem;
                 font-size: 0.95rem;
             }
 
             /* Stats in 2×2 grid on phones */
             .hero-stats {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                transform: none;
+                margin-top: 2.5rem;
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 1rem 2rem;
-                bottom: 1.5rem;
-                left: 50%;
-                transform: translateX(-50%);
-                width: calc(100% - 2rem);
+                width: 100%;
+                justify-items: center;
+                text-align: center;
+            }
+
+            .stat-item {
+                text-align: center;
+                width: 100%;
             }
 
             .stat-number {
                 font-size: 1.3rem;
+                text-align: center;
             }
 
             .stat-label {
                 font-size: 0.68rem;
+                text-align: center;
             }
         }
 
@@ -736,8 +783,7 @@
         <!-- Overlay -->
         <div class="hero-overlay" aria-hidden="true"></div>
 
-        <!-- Radial glow -->
-        <div class="hero-glow" aria-hidden="true"></div>
+
 
         <!-- Main Content -->
         <div class="hero-content">
